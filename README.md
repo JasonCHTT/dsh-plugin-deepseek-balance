@@ -10,7 +10,7 @@ A [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) (dsh) Web 
 
 > 本次运行已用 ¥0.42 · 余额 ¥10.98
 
-It renders one line directly under the existing token stats line (the `517 / 12.2K · 45.2s …` strip). Hover for details (granted / topped-up / last update), click anywhere to refresh immediately.
+It renders one line directly under the existing token stats line (the `517 / 12.2K · 45.2s …` strip). Hover for details (granted / topped-up / last update); **click the spent figure to jump straight to the DeepSeek platform usage page** for official consumption details, and click the refresh icon at the end of the line to re-poll immediately.
 
 ## Table of Contents
 
@@ -34,7 +34,8 @@ It renders one line directly under the existing token stats line (the `517 / 12.
 - **Zero extra configuration** — reuses the `DEEPSEEK_API_KEY` credential the harness already has (the one the Web Models page writes); no separate key management.
 - **Official API only** — reads the documented `GET https://api.deepseek.com/user/balance` endpoint; no scraping, no session tokens.
 - **Live readout** — polls every 60 seconds; the readout sits in the same band as the built-in token stats (`conversation.composer.dock` slot), so it always lives together with the token bar.
-- **Click to refresh** — clicking the line forces an immediate upstream re-poll.
+- **One-click refresh** — the refresh icon at the end of the line forces an immediate upstream re-poll.
+- **One click to the usage page** — the `spent this run` figure is a real hyperlink that opens the DeepSeek platform usage page (`platform.deepseek.com/usage`) in a new tab for the official consumption details.
 - **Privacy-conscious** — the key never crosses to the browser; the browser only ever sees numbers served from a same-origin route on the local host. Nothing is written to logs or sent anywhere.
 - **Top-up aware** — if you top up mid-run, the baseline lifts automatically so the spent figure never goes negative.
 - **Dependency-free host** — the host half imports only Node built-ins, so it can be linked from anywhere without resolving extra packages.
@@ -46,11 +47,11 @@ The meter is the last line under the composer card:
 ```
 ┌──────────────────────────────────────────────┐
 │  517 / 12.2K · 45.2s · 12 tok/s    │ 42% …    │   ← existing stats line
-│  本次运行已用 ¥0.42 · 余额 ¥10.98           │   ← this plugin (click to refresh)
+│  本次运行已用 ¥0.42 · 余额 ¥10.98   ⟳        │   ← this plugin (click spent → platform usage; end-of-line icon → refresh)
 └──────────────────────────────────────────────┘
 ```
 
-Hover tooltip: `赠送 1.23 · 充值 9.75 · 更新于 14:32:05 · 点击刷新` (granted · topped-up · updated at · click to refresh).
+Hover tooltip: `赠送 1.23 · 充值 9.75 · 更新于 14:32:05 · 点击已用跳转平台用量明细，点击右侧刷新图标立即刷新` (granted · topped-up · updated at · click spent for the platform usage page, click the refresh icon to re-poll).
 
 ## How it works
 
@@ -130,7 +131,8 @@ Example:
 
 - **Read** — `本次运行已用 ¥0.42 · 余额 ¥10.98` under the composer.
 - **Hover** — tooltip with granted / topped-up balance, an `余额不足` marker when `is_available` is false, and the last update time.
-- **Click** — forces an immediate refresh (useful right after a spend or top-up).
+- **Click the spent figure** — opens the DeepSeek platform usage page (`https://platform.deepseek.com/usage`) in a new tab with the official consumption details (platform login required).
+- **Click the refresh icon** — forces an immediate refresh (useful right after a spend or top-up).
 - **Loading** — shows `DeepSeek 余额查询中…` until the first snapshot arrives.
 - **Missing key** — shows `DeepSeek 余额：未配置 API Key` with a hint; the plugin retries every 5 seconds and heals as soon as a key becomes available.
 
