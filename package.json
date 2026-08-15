@@ -1,0 +1,29 @@
+{
+  "name": "dsh-plugin-deepseek-balance",
+  "version": "1.0.0",
+  "description": "DeepSeek balance & per-run spend readout for the DeepSeek Harness Web UI (no platform login needed)",
+  "type": "module",
+  "main": "lib/index.js",
+  "author": "Jason Gao",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "balance",
+    "dsh-plugin"
+  ],
+  "license": "MIT"
+}
