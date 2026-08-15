@@ -4,7 +4,7 @@
   "description": "DeepSeek balance & per-run spend readout for the DeepSeek Harness Web UI (no platform login needed)",
   "type": "module",
   "main": "lib/index.js",
-  "author": "Jason Gao",
+  "author": "JasonCHTT",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
